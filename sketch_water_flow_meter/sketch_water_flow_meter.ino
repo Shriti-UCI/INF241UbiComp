@@ -1,16 +1,9 @@
 /*
-  Web client
+  Water flow meter
  
- This sketch connects to a website (http://www.google.com)
- using an Arduino Wiznet Ethernet shield. 
- 
- Circuit:
- * Ethernet shield attached to pins 10, 11, 12, 13
- 
- created 18 Dec 2009
- modified 9 Apr 2012
- by David A. Mellis
- 
+ This sketch obtains input from a water flow meter and pushes data 
+ to dweet.io through a web client using an Arduino Wiznet Ethernet shield. 
+
  */
 
 
@@ -59,30 +52,6 @@ void setup() {
   delay(1000);
   Serial.println("connecting...");
 
-  // if you get a connection, report back via serial:
-/* int i=0;
- while(true)
- { 
-   if (client.connect("dweet.io", 80)) {
-      Serial.println("connected");
-    // Make a HTTP request:
-      client.print("GET /dweet/for/UciUbicompSensor1?data=");
-      client.print(i);
-      client.println(" HTTP/1.1");
-      client.println("HOST: dweet.io");
-      client.println("Connection: close");
-      client.println();
-      i=i+10;
-      Serial.println(i);
-      client.stop();
-    }
-  
-  else {
-    // if you didn't get a connection to the server:
-    Serial.println("connection failed");
-  }
-  delay(1000);
- }*/
 }
 
 void loop()
@@ -94,6 +63,7 @@ void loop()
   Serial.print (" L/hour\r\n"); //Prints "L/hour" and returns a  new line
   
   //int i=0;
+  // if you get a connection, report back via serial:
   if (client.connect("dweet.io", 80)) {
       Serial.println("connected");
     // Make a HTTP request:
@@ -102,9 +72,7 @@ void loop()
       client.println(" HTTP/1.1");
       client.println("HOST: dweet.io");
       client.println("Connection: close");
-      client.println();
-      //i=i+10;
-      //Serial.println(i);
+      client.println(); 
       client.stop();
     }
   
@@ -112,6 +80,5 @@ void loop()
     // if you didn't get a connection to the server:
     Serial.println("connection failed");
   }
-  //delay(1000);
 }
 
